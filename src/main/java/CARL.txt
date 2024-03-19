@@ -1,0 +1,18 @@
+Generic while-loop
+Generic for-loop
+Generic if-statement
+Generic random seed
+Map generateRandom()/generateRandomBySeed(int seed); //returns map or have somewhere global reference
+//Call generateRandom/generateNon-randomSeed(int seed) before each function that creates something in the map.
+//Example: generateRandom.createRooms(int roomCount, int minRoomSize, int maxRoomSize);
+createGrid(int width, int height);//returns map or have somewhere global reference
+addPlayer(); // might be unneeded //returns map or have somewhere global reference
+addTile(Character symbol, String name, Boolean value);
+addMonster(Character symbol, String name, Boolean value, int difficulty);
+createRooms(int roomCount, int minRoomSize, int maxRoomSize); //returns map or have somewhere global reference
+createCorridors(); //returns map or have somewhere global reference
+generateSpawn(int difficulty); //returns map or have somewhere global reference
+printMap();
+printJSON();
+printLine("");
+main(String[] args);

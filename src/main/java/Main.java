@@ -1,10 +1,5 @@
 public class Main {
-
-
-    public void generateJson() {
-
-    }
-
+    
     public static void main(String[] args) {
         MapGenerator gen = new MapGenerator(1337);
         gen.gridGenerator(50,50);
@@ -18,7 +13,6 @@ public class Main {
         gen.generateCorridors();
         gen.generateSpawns(20);
         gen.printMap();
-
-
+        System.out.println(gen);
     }
 }

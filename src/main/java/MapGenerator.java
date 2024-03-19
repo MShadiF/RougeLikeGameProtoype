@@ -123,9 +123,39 @@ public class MapGenerator {
         List<TileInformation> tilePlayer = tileInformations.get("Player");
         map[yPlayer][xPlayer] = tilePlayer.get(0).getSymbol();
     }
+
     @Override
-    public String toString(){
-        return "to do";
+    public String toString() {
+        return "{\n \"map\":{\n" +
+            "\"size\": {"+
+                "\"height\":" + map.length +
+                ",\"width\":" + map[0].length +
+            "},\n" +
+                "\"tileInformation\":[" + tileInformations.values().toString().replaceAll("\\[","").replaceAll("]","") +
+                "],\"tiles\":" + mapPrinter() +
+                "}}";
+
     }
 
+    public String mapPrinter() {
+        StringBuilder sb = new StringBuilder("[");
+        for (int i = 0; i < map.length; i++) {
+
+            sb.append("{\"row\":[");
+            for (int j = 0; j < map[0].length; j++){
+                sb.append("\"").append(map[i][j]).append("\"");
+                if(j < map[0].length-1)
+                {
+                    sb.append(",");
+                }
+            }
+            sb.append("]}");
+            if(i< map.length-1)
+            {
+                sb.append(",");
+            }
+        }
+        sb.append("]");
+        return sb.toString();
+    }
 }

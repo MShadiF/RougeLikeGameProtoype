@@ -25,10 +25,13 @@ public class TileInformation {
 
     @Override
     public String toString() {
-        return "TileInformation{" +
-                "\"tile\": " + symbol + "\n" +
-                ", \"name\": " + name + "\n" +
-                ", \"value\": " + value + "\n" +
-                '}';
+        return "{" +
+                "\"tile\": \"" + symbol + "\",\n" +
+                "\"info\": {\n" +
+                "  \"name\": \"" + name + "\",\n" +
+                "  \"baseInformation\": {\n" +
+                "    \"solid\": " + value + "\n" +
+                "  }\n" +
+                "}}";
     }
 }
