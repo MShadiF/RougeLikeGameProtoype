@@ -22,7 +22,9 @@ public class TileInformation {
     public Character getSymbol() {
         return symbol;
     }
-
+    public String getName(){
+        return name;
+    }
     @Override
     public String toString() {
         return "{" +

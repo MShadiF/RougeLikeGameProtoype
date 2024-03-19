@@ -18,7 +18,7 @@ public class MapGenerator {
         tileInformations.get("Player").add(new TileInformation('p', "Player", false));
     }
     public void addTile(Character symbol, String name, Boolean value) {
-        if(!tileInformations.containsKey("Monster")) {
+        if(!tileInformations.containsKey("tile")) {
             tileInformations.put("tile",new ArrayList<>());
         }
         tileInformations.get("tile").add(new TileInformation(symbol, name, value));
@@ -30,16 +30,17 @@ public class MapGenerator {
         }
         tileInformations.get("Monster").add(new TileInformation(symbol, name, value, difficulty));
     }
-    public void gridGenerator(int width, int height) {
+    public char[][] gridGenerator(int width, int height) {
         map = new char[height][width];
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 map[i][j] = 'w';
             }
         }
+        return map;
     }
 
-    public void generateRooms(int roomCount, int minRoomSize, int maxRoomSize) {
+    public char[][] generateRooms(int roomCount, int minRoomSize, int maxRoomSize) {
         while(roomCount > rooms.size()) {
             int roomWidth = random.nextInt(minRoomSize, maxRoomSize);
             int roomHeight = random.nextInt(minRoomSize, maxRoomSize);
@@ -56,6 +57,7 @@ public class MapGenerator {
                 rooms.add(room);
             }
         }
+        return map;
     }
 
     private boolean overlap(int x, int y, int width, int height) {
@@ -73,7 +75,7 @@ public class MapGenerator {
         return false;
     }
 
-    public void generateCorridors() {
+    public char[][] generateCorridors() {
         for (int i = 0; i < rooms.size() - 1; i++){
             int centerX1 = rooms.get(i).centerX();
             int centerY1 = rooms.get(i).centerY();
@@ -90,6 +92,7 @@ public class MapGenerator {
                 map[j][centerX1] = 'f';
             }
         }
+        return map;
     }
 
     public void printMap() {
@@ -101,7 +104,7 @@ public class MapGenerator {
         }
     }
 
-    public void generateSpawns(int difficulty) {
+    public char[][] generateSpawns(int difficulty) {
         while (difficulty > 0) {
             int roomSpawn = random.nextInt(rooms.size() - 2);
             int x = random.nextInt(rooms.get(roomSpawn).getX(), rooms.get(roomSpawn).getX() + rooms.get(roomSpawn).getWidth());
@@ -109,7 +112,6 @@ public class MapGenerator {
             List<TileInformation> tileMonster = tileInformations.get("Monster");
             int randomMonster = random.nextInt(tileMonster.size());
             if(difficulty >= tileMonster.get(randomMonster).getDifficulty()) {
-                System.out.println(tileMonster.get(randomMonster).getSymbol());
                 if(map[y][x] == 'f') {
                     System.out.println("Hello");
                     map[y][x] = tileMonster.get(randomMonster).getSymbol();
@@ -117,11 +119,11 @@ public class MapGenerator {
                 }
             }
         }
-        System.out.println("spawning player");
         int xPlayer = random.nextInt(rooms.get(rooms.size() - 1).getX(), rooms.get(rooms.size() - 1).getX() + rooms.get(rooms.size() - 1).getWidth());
         int yPlayer = random.nextInt(rooms.get(rooms.size() - 1).getY(), rooms.get(rooms.size() - 1).getY() + rooms.get(rooms.size() - 1).getHeight());
         List<TileInformation> tilePlayer = tileInformations.get("Player");
         map[yPlayer][xPlayer] = tilePlayer.get(0).getSymbol();
+        return map;
     }
 
     @Override
